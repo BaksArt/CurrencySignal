@@ -38,6 +38,7 @@ public class CurrencyController {
 
     @DeleteMapping("/currencies/{id}")
     public ResponseEntity<Void> deleteCurrency(@PathVariable String id) {
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
+
 }
