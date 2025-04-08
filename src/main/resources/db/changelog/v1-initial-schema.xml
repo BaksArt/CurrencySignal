@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="v1-initial-schema" author="baksart">
+        <createTable tableName="currencies">
+            <column name="id" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="base_currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_change_range" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
