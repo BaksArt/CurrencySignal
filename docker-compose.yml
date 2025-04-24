@@ -1,0 +1,46 @@
+services:
+  app:
+    build: .
+    container_name: currency-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/currency_tracker
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    networks:
+      - app_network
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  db:
+    image: postgres:15
+    container_name: currency-db
+    networks:
+      - app_network
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: currency_tracker
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d currency_tracker"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pg_data:
+
+networks:
+  app_network:
