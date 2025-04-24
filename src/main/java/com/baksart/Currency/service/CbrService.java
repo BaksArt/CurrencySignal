@@ -22,7 +22,7 @@ public class CbrService {
     private final CurrencyRepository currencyRepository;
     private final ObjectMapper objectMapper;
 
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 * * * *")
     public void checkCurrencyChanges() {
         log.info("Starting currency rates check...");
 
